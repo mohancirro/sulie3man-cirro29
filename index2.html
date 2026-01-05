@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mohamed Cirro | JavaScript Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+body{background:#0f172a;color:#f8fafc}
+
+/* HEADER */
+header{
+  background:#020617;
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav span{
+  margin-left:20px;
+  cursor:pointer;
+  color:#94a3b8;
+}
+.nav span:hover{color:#38bdf8}
+
+/* MAIN */
+main{max-width:1100px;margin:40px auto;padding:20px}
+.glass{
+  background:rgba(30,41,59,.7);
+  padding:30px;
+  border-radius:20px;
+  margin-top:20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+button{
+  padding:8px 16px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  margin:5px;
+  transition: all 0.3s ease;
+}
+button:hover{
+  transform: translateY(-2px);
+}
+.btn{
+  background:#38bdf8;
+  color:#020617;
+  font-weight:600;
+}
+.code{
+  background:#020617;
+  color:#38bdf8;
+  padding:10px;
+  border-radius:8px;
+  margin-top:10px;
+  font-family:monospace;
+}
+#output{
+  background:#020617;
+  padding:20px;
+  border-radius:15px;
+  margin-top:20px;
+  min-height:120px;
+}
+
+/* FOOTER */
+footer{
+  background:#020617;
+  border-top:1px solid #334155;
+  padding:40px 20px;
+  text-align:center;
+  margin-top:60px;
+}
+footer h3 span{color:#38bdf8}
+footer p{color:#94a3b8;margin:10px 0}
+footer a{
+  color:#38bdf8;
+  text-decoration:none;
+  margin:0 10px;
+  font-weight:600;
+}
+footer a:hover{text-decoration:underline}
+
+/* NEW STYLES FOR ENHANCEMENTS */
+.personal-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.info-card {
+  background: rgba(15, 23, 42, 0.6);
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 4px solid #38bdf8;
+}
+
+.info-card h3 {
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+.contact-form {
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #94a3b8;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #f8fafc;
+  font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+}
+
+.submit-btn {
+  background: #38bdf8;
+  color: #020617;
+  font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.alert {
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  display: none;
+}
+
+.success {
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid #22c55e;
+  color: #86efac;
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+}
+
+.ref-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.ref-link:hover {
+  text-decoration: underline;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.home-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.home-content p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+.highlight {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+/* PROFILE IMAGE STYLES */
+.profile-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.profile-image-container {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.profile-image {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 20px;
+  border: 5px solid #38bdf8;
+  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+  transition: all 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px rgba(56, 189, 248, 0.4);
+}
+
+.profile-details {
+  flex: 2;
+  min-width: 300px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #38bdf8;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background: #38bdf8;
+  color: #020617;
+  transform: translateY(-3px);
+}
+
+/* Image placeholder styling */
+.image-placeholder {
+  width: 100%;
+  height: 350px;
+  border-radius: 20px;
+  border: 5px solid #38bdf8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #94a3b8;
+}
+
+.image-placeholder i {
+  font-size: 80px;
+  color: #38bdf8;
+  margin-bottom: 15px;
+}
+
+.image-instructions {
+  background: rgba(56, 189, 248, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.image-instructions h4 {
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+.image-instructions code {
+  background: #020617;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: block;
+  margin: 5px 0;
+  font-family: monospace;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div style="font-size:22px;font-weight:800">
+    <span style="color:#38bdf8">MOHAMED</span>.Cirro
+  </div>
+  <div class="nav">
+    <span onclick="show('home')">Home</span>
+    <span onclick="show('chapters')">Chapters</span>
+    <span onclick="show('about')">About</span>
+  </div>
+</header>
+
+<main>
+<section id="home">
+  <div class="home-content">
+    <h1>JavaScript <span style="color:#38bdf8">Master Portal</span></h1>
+    <p style="color:#94a3b8;margin-top:10px; max-width: 800px;">
+      Welcome to my JavaScript learning portal! Here you can explore various JavaScript concepts through interactive examples. This portal covers objects, DOM manipulation, and events with practical examples you can run directly in your browser.
+    </p>
+    <div class="glass" style="margin-top: 40px; width: 100%;">
+      <h2>What You'll Learn</h2>
+      <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 20px;">
+        <div style="text-align: center; padding: 20px;">
+          <h3 style="color: #38bdf8;">Objects</h3>
+          <p>Create, modify, and work with JavaScript objects</p>
+        </div>
+        <div style="text-align: center; padding: 20px;">
+          <h3 style="color: #38bdf8;">DOM</h3>
+          <p>Manipulate webpage elements dynamically</p>
+        </div>
+        <div style="text-align: center; padding: 20px;">
+          <h3 style="color: #38bdf8;">Events</h3>
+          <p>Handle user interactions and browser events</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="chapters" style="display:none"></section>
+
+<section id="about" style="display:none">
+  <h1>About <span style="color:#38bdf8">Me</span></h1>
+  
+
+        
+        <img src="cirro.jpg.jpeg" 
+             class="profile-image" 
+             alt="Mohamed Cirro">
+        -->
+        
+        <div class="social-links">
+          <a href="#" class="social-icon">FB</a>
+          <a href="#" class="social-icon">WA</a>
+          <a href="https://github.com/mohamedcirro" target="_blank" class="social-icon">GH</a>
+          <a href="#" class="social-icon">IN</a>
+        </div>
+      </div>
+      
+      <div class="profile-details">
+        <h2>Mohamed Abas Suleiman</h2>
+        <p style="color: #94a3b8; margin-bottom: 25px;">JavaScript Developer & Computer Science Student</p>
+        
+        <div class="personal-info">
+          <div class="info-card">
+            <h3>Basic Details</h3>
+            <p><span class="highlight">Full Name:</span> Mohamed Abas Suleiman</p>
+            <p><span class="highlight">Student ID:</span> CB15B-cs1500958</p>
+            <p><span class="highlight">Class:</span> CB15B</p>
+            <p><span class="highlight">University:</span> Jazeera University</p>
+          </div>
+          
+          <div class="info-card">
+            <h3>Contact Details</h3>
+            <p><span class="highlight">Phone:</span> +252 61 3 191 316</p>
+            <p><span class="highlight">Email:</span> mohamedcirro@gamil.com</p>
+            <p><span class="highlight">Location:</span> Mogadishu, Somalia</p>
+          </div>
+          
+          <div class="info-card">
+            <h3>Technical Skills</h3>
+            <p><span class="highlight">Frontend:</span> HTML, CSS, JavaScript, React</p>
+            <p><span class="highlight">Backend:</span> Node.js, SQL, PHP</p>
+            <p><span class="highlight">Tools:</span> Git, VS Code, Figma</p>
+          </div>
+          
+          <div class="info-card">
+            <h3>References & Links</h3>
+            <p><span class="highlight">GitHub:</span> 
+              <a href="https://github.com/mohamedcirro" class="ref-link" target="_blank">github.com/mohamedcirro</a>
+            </p>
+            <p><span class="highlight">Portfolio:</span> 
+              <a href="#" class="ref-link">mohamedcirro.com</a>
+            </p>
+            <p><span class="highlight">LinkedIn:</span> 
+              <a href="#" class="ref-link">linkedin.com/in/mohamedcirro</a>
+            </p>
+          </div>
+        </div>
+        
+        <div class="contact-form">
+          <h2>Contact Me</h2>
+          <p style="color: #94a3b8; margin-bottom: 20px;">Feel free to send me a message and I'll get back to you as soon as possible.</p>
+          
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+          
+          <div id="formAlert" class="alert"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <h3><span>MOHAMED</span>.Cirro</h3>
+  <p>JavaScript Master Portal – Learning by Doing</p>
+  <div>
+    <a href="https://facebook.com" target="_blank">Facebook</a>
+    <a href="https://wa.me/252613791316" target="_blank">WhatsApp</a>
+    <a href="https://github.com/mohamedcirro" target="_blank">GitHub</a>
+       <a href="https://www.base64-image.de/" target="_blank">GitHub</a>
+  </div>
+  <p style="font-size:14px;color:#64748b">
+    © 2025 Mohamed Abas Suleiman | COMPUTER SCIENCE AND IT | PROJECT SEMESTER3
+  </p>
+</footer>
+
+<script src="index2.js">
+
+</script>
+
+</body>
+</html>
